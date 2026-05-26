@@ -7,7 +7,9 @@ requires-python = ">=3.12"
 dependencies = [
     "flask>=3.0.0",
     "gunicorn>=22.0.0",
+    "psycopg[binary]>=3.2.0",
     "python-dotenv>=1.0.1",
+    "validators>=0.22.0",
 ]
 
 [dependency-groups]
