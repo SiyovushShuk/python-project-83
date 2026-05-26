@@ -5,7 +5,7 @@ import validators
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 
-from page_analyzer.db import create_url, get_url, list_urls
+from page_analyzer.db import create_check, create_url, get_url, list_checks, list_urls
 
 load_dotenv()
 
@@ -67,4 +67,15 @@ def urls_show(url_id: int):
     url = get_url(url_id)
     if not url:
         return "Not Found", 404
-    return render_template("urls/show.html", url=url)
+    checks = list_checks(url_id)
+    return render_template("urls/show.html", url=url, checks=checks)
+
+
+@app.post("/urls/<int:url_id>/checks")
+def url_checks_create(url_id: int):
+    try:
+        create_check(url_id)
+        flash("Страница успешно проверена", "success")
+    except Exception:
+        flash("Произошла ошибка при проверке", "danger")
+    return redirect(url_for("urls_show", url_id=url_id))

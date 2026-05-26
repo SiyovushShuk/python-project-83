@@ -46,9 +46,46 @@ def list_urls():
         with conn.cursor(row_factory=dict_row) as cur:
             cur.execute(
                 """
-                SELECT id, name, created_at
+                SELECT
+                    urls.id,
+                    urls.name,
+                    urls.created_at,
+                    url_checks.last_check
                 FROM urls
-                ORDER BY id DESC;
+                LEFT JOIN (
+                    SELECT url_id, MAX(created_at) AS last_check
+                    FROM url_checks
+                    GROUP BY url_id
+                ) AS url_checks
+                ON urls.id = url_checks.url_id
+                ORDER BY urls.id DESC;
                 """
+            )
+            return cur.fetchall()
+
+
+def create_check(url_id: int) -> int:
+    query = """
+        INSERT INTO url_checks (url_id, created_at)
+        VALUES (%s, %s)
+        RETURNING id;
+    """
+    with get_connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute(query, (url_id, date.today()))
+            return cur.fetchone()["id"]
+
+
+def list_checks(url_id: int):
+    with get_connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute(
+                """
+                SELECT id, status_code, h1, title, description, created_at
+                FROM url_checks
+                WHERE url_id = %s
+                ORDER BY id DESC;
+                """,
+                (url_id,),
             )
             return cur.fetchall()

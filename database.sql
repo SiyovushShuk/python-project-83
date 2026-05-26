@@ -3,3 +3,13 @@ CREATE TABLE IF NOT EXISTS urls (
     name VARCHAR(255) UNIQUE NOT NULL,
     created_at DATE NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS url_checks (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    url_id BIGINT REFERENCES urls (id) ON DELETE CASCADE NOT NULL,
+    status_code INTEGER,
+    h1 VARCHAR(255),
+    title VARCHAR(255),
+    description TEXT,
+    created_at DATE NOT NULL
+);
