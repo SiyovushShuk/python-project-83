@@ -1,9 +1,11 @@
 import os
 from urllib.parse import urlparse
 
+import requests
 import validators
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
+from requests import RequestException
 
 from page_analyzer.db import create_check, create_url, get_url, list_checks, list_urls
 
@@ -73,9 +75,15 @@ def urls_show(url_id: int):
 
 @app.post("/urls/<int:url_id>/checks")
 def url_checks_create(url_id: int):
+    url = get_url(url_id)
+    if not url:
+        return "Not Found", 404
+
     try:
-        create_check(url_id)
+        response = requests.get(url["name"], timeout=5)
+        response.raise_for_status()
+        create_check(url_id, response.status_code)
         flash("Страница успешно проверена", "success")
-    except Exception:
+    except RequestException:
         flash("Произошла ошибка при проверке", "danger")
     return redirect(url_for("urls_show", url_id=url_id))
