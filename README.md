@@ -19,6 +19,20 @@ https://python-project-83-sjyn.onrender.com/
 - Open the “Sites” page and choose the added URL
 - Click “Run check” — a new record will appear in the checks table
 
+### Dependencies
+
+| Package | Purpose |
+| --- | --- |
+| Flask | Web framework (routing, request handling, templates). |
+| gunicorn | WSGI server for running the app in production. |
+| python-dotenv | Loads environment variables from `.env` for local development. |
+| psycopg[binary] | PostgreSQL driver for database connections and queries. |
+| requests | HTTP client for fetching pages during checks. |
+| beautifulsoup4 | HTML parsing to extract `<h1>`, `<title>`, and `description`. |
+| validators | URL validation before saving and checking websites. |
+| pytest | Test framework (dev dependency). |
+| ruff | Linter (dev dependency). |
+
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
 
