@@ -67,15 +67,21 @@ def list_urls():
             return cur.fetchall()
 
 
-def create_check(url_id: int, status_code: int) -> int:
+def create_check(
+    url_id: int,
+    status_code: int,
+    h1: str | None,
+    title: str | None,
+    description: str | None,
+) -> int:
     query = """
-        INSERT INTO url_checks (url_id, status_code, created_at)
-        VALUES (%s, %s, %s)
+        INSERT INTO url_checks (url_id, status_code, h1, title, description, created_at)
+        VALUES (%s, %s, %s, %s, %s, %s)
         RETURNING id;
     """
     with get_connection() as conn:
         with conn.cursor(row_factory=dict_row) as cur:
-            cur.execute(query, (url_id, status_code, date.today()))
+            cur.execute(query, (url_id, status_code, h1, title, description, date.today()))
             return cur.fetchone()["id"]
 
 

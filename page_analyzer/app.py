@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 
 import requests
 import validators
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 from requests import RequestException
@@ -13,6 +14,13 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev")
+
+
+@app.template_filter("truncate_200")
+def truncate_200(value: str | None) -> str:
+    if not value:
+        return ""
+    return value if len(value) <= 200 else f"{value[:200]}..."
 
 
 @app.get("/")
@@ -40,6 +48,28 @@ def validate_url(raw_url: str) -> str | None:
     if normalized in ("http://", "https://"):
         return "Некорректный URL"
     return None
+
+
+def extract_seo_data(html: str) -> dict[str, str | None]:
+    soup = BeautifulSoup(html, "html.parser")
+
+    h1 = soup.find("h1")
+    title = soup.find("title")
+    description_meta = soup.find(
+        "meta", attrs={"name": lambda v: isinstance(v, str) and v.lower() == "description"}
+    )
+
+    description = None
+    if description_meta is not None:
+        content = description_meta.get("content")
+        if isinstance(content, str):
+            description = content.strip() or None
+
+    return {
+        "h1": h1.get_text(strip=True) if h1 else None,
+        "title": title.get_text(strip=True) if title else None,
+        "description": description,
+    }
 
 
 @app.post("/urls")
@@ -82,7 +112,14 @@ def url_checks_create(url_id: int):
     try:
         response = requests.get(url["name"], timeout=5)
         response.raise_for_status()
-        create_check(url_id, response.status_code)
+        seo = extract_seo_data(response.text)
+        create_check(
+            url_id,
+            response.status_code,
+            seo["h1"],
+            seo["title"],
+            seo["description"],
+        )
         flash("Страница успешно проверена", "success")
     except RequestException:
         flash("Произошла ошибка при проверке", "danger")
