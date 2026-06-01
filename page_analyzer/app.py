@@ -77,6 +77,7 @@ def urls_create():
     raw_url = request.form.get("url", "").strip()
     error = validate_url(raw_url)
     if error:
+        flash(error, "danger")
         return render_template("index.html", url=raw_url, error=error), 422
 
     normalized = normalize_url(raw_url)
