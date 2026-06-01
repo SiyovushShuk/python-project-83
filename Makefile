@@ -20,3 +20,6 @@ lint:
 
 test:
 	uv run pytest -q
+
+playwright-install:
+	uv run playwright install chromium
