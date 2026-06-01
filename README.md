@@ -32,6 +32,7 @@ https://python-project-83-sjyn.onrender.com/
 | validators | URL validation before saving and checking websites. |
 | pytest | Test framework (dev dependency). |
 | ruff | Linter (dev dependency). |
+| playwright | Browser automation framework used for end-to-end testing (runs real Chromium browser). | 
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
