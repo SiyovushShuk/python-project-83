@@ -110,7 +110,11 @@ def url_checks_create(url_id: int):
         return "Not Found", 404
 
     try:
-        response = requests.get(url["name"], timeout=5)
+        response = requests.get(
+            url["name"],
+            timeout=15,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; PageAnalyzer/1.0)"},
+        )
         response.raise_for_status()
         seo = extract_seo_data(response.text)
         create_check(
