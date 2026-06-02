@@ -15,6 +15,7 @@ Requires-Dist: validators>=0.22.0
 
 [![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=SiyovushShuk_python-project-83&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=SiyovushShuk_python-project-83)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=SiyovushShuk_python-project-83&metric=coverage)](https://sonarcloud.io/summary/new_code?id=SiyovushShuk_python-project-83)
 
 ## Page Analyzer
 
