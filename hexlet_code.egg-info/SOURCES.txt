@@ -9,3 +9,6 @@ page_analyzer/__init__.py
 page_analyzer/app.py
 page_analyzer/db.py
 tests/test_app.py
+tests/test_db.py
+tests/test_routes.py
+tests/test_utils.py

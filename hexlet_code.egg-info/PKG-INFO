@@ -12,6 +12,10 @@ Requires-Dist: python-dotenv>=1.0.1
 Requires-Dist: requests>=2.32.0
 Requires-Dist: validators>=0.22.0
 
+
+[![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=SiyovushShuk_python-project-83&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=SiyovushShuk_python-project-83)
+
 ## Page Analyzer
 
 Page Analyzer - web app that lets you add websites, run checks, and view basic SEO analysis results:
@@ -46,9 +50,7 @@ https://python-project-83-sjyn.onrender.com/
 | validators | URL validation before saving and checking websites. |
 | pytest | Test framework (dev dependency). |
 | ruff | Linter (dev dependency). |
-
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
+| playwright | Browser automation framework used for end-to-end testing (runs real Chromium browser). | 
 
 ### Local run
 

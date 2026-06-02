@@ -18,6 +18,7 @@ dependencies = [
 dev = [
     "playwright>=1.45.0",
     "pytest>=8.0.0",
+    "pytest-cov>=5.0.0",
     "pytest-playwright>=0.5.0",
     "ruff>=0.4.0",
 ]
@@ -31,7 +32,12 @@ where = ["."]
 include = ["page_analyzer*"]
 
 [tool.pytest.ini_options]
-addopts = ["--import-mode=prepend"]
+addopts = [
+    "--import-mode=prepend",
+    "--cov=page_analyzer",
+    "--cov-report=term-missing",
+    "--cov-fail-under=90",
+]
 
 [tool.ruff]
 line-length = 88
