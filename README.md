@@ -1,3 +1,7 @@
+
+[![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=SiyovushShuk_python-project-83&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=SiyovushShuk_python-project-83)
+
 ## Page Analyzer
 
 Page Analyzer - web app that lets you add websites, run checks, and view basic SEO analysis results:
@@ -33,9 +37,6 @@ https://python-project-83-sjyn.onrender.com/
 | pytest | Test framework (dev dependency). |
 | ruff | Linter (dev dependency). |
 | playwright | Browser automation framework used for end-to-end testing (runs real Chromium browser). | 
-
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/SiyovushShuk/python-project-83/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SiyovushShuk/python-project-83/actions)
 
 ### Local run
 
